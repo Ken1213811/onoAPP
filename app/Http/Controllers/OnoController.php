@@ -8,6 +8,7 @@ class OnoController extends Controller
 {
     public function index(Ono $ono)
     {
-        return $ono->get();
+        
+        return view('onos.index')->with(['onos'=>$ono->getPaginateByLimit()]);
     }
 }
