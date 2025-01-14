@@ -15,17 +15,14 @@ use App\Http\Controllers\OnoController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::controller(OnoController::class)->middleware(['auth'])->group(function(){
-    Route::get('/', 'index')->name('index');
-});
+Route::get('/', [OnoController::class, 'index']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

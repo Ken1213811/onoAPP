@@ -9,10 +9,15 @@
     <body>
         <h1>Onomatopes</h1>
         <div class='onos'>
-            <div class='ono'>
-                <h2 class='word'>キラキラ</h2>
-                <p class='description'>眩しく光る様子を指す。</p>
-            </div>
+            @foreach ($onos as $ono )
+                <div class='ono'>
+                    <h2 class='name'>{{$ono->name }}</h2>
+                    <p class='description'>{{$ono->description }}</p>
+                </div>
+            @endforeach
+        </div>
+        <div class='paginate'>
+            {{ $onos->links() }}
         </div>
     </body>
 </html>

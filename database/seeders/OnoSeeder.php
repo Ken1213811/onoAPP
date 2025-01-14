@@ -15,12 +15,28 @@ class OnoSeeder extends Seeder
     public function run(): void
     {
         DB::table('onomatopes')->insert([
-            'id'=>'1',
-            'name'=>'キラキラ',
-            'description'=>'眩しく光る',
+            'name'=>'きらきら',
+            'description'=>'眩しく光る様子',
             'created_at' => now(),
             'updated_at' => now(),
-
+        ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'そよそよ',
+            'description'=>'風が静かに心地よく吹く様子',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'ハラハラ',
+            'description'=>'危険な状況を見て、悪いことや大変なことが起きないか心配する様子',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'ソワソワ',
+            'description'=>'気持ちや態度が落ち着かない様子',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         
     }
