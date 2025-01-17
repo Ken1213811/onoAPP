@@ -21,7 +21,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', [OnoController::class, 'index']);
+Route::controller(OnoController::class)->middleware(['auth'])->group(function(){
+    Route::get('/','index')->name('index');
+});
 
 
 Route::middleware('auth')->group(function () {
