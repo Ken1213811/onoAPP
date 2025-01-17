@@ -38,6 +38,44 @@ class OnoSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'なみなみ',
+            'description'=>'水やお酒などが液体が、容器からあふれるほどいっぱいである様子',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'コトコト',
+            'description'=>'弱火で時間をかけて煮込む様子',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'くちゃくちゃ',
+            'description'=>'口の中で物を噛むときの音',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'ゴクゴク',
+            'description'=>'飲み物を飲む時に出る音',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'あつあつ',
+            'description'=>'① 料理が出来立てで熱いこと
+② カップル、夫婦が熱烈に愛し合っている様子',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('onomatopes')->insert([
+            'name'=>'もじゃもじゃ',
+            'description'=>'毛や草が乱雑にたくさん生えている様子',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
         
     }
 }

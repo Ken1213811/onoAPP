@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
-        <h1>Onomatopes</h1>
+<x-app-layout>
+    <x-slot name="header">
+        words
+    </x-slot>
+
         <div class='onos'>
             @foreach ($onos as $ono )
                 <div class='ono'>
-                    <h2 class='name'>{{$ono->name }}</h2>
+                    <h2 class='name'>
+                    <input type="checkbox" name="ono_ids[]" value="{{ $ono->id }}">
+                    {{$ono->name }}
+                </h2>
                     <p class='description'>{{$ono->description }}</p>
                 </div>
             @endforeach
@@ -19,5 +17,34 @@
         <div class='paginate'>
             {{ $onos->links() }}
         </div>
-    </body>
-</html>
+</x-app-layout>
+
+<!--CSS-->
+<style>
+    .onos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ono {
+        margin-bottom: 15px;
+    }
+
+    .name {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+
+    .description {
+        margin-top: 5px;
+        color: #666;
+    }
+
+    .paginate {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+  
+
