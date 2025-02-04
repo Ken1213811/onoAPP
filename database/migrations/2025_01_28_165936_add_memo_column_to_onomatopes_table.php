@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use PhpParser\Node\NullableType;
 
 return new class extends Migration
 {
@@ -11,12 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('onomatope_users', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('onomatopes_id')->constrained();
-            $table->foreignId('users_id')->constrained(); 
-         
-            $table->timestamps();
+        Schema::table('onomatopes', function (Blueprint $table) {
+            $table->string('memo',100)->nullable();
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('onomatope_users');
+        Schema::table('onomatopes', function (Blueprint $table) {
+            //
+        });
     }
 };

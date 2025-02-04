@@ -2,9 +2,9 @@
     <x-slot name="header">
         words
     </x-slot>
-
+    
     <div class='onos'>
-    @foreach ($onos as $ono)
+    @foreach ($onomatopes as $ono)
         <div class='ono'>
                 @if($ono->users->count() == 0)
                     <form action="/onomatopes/{{$ono->id}}/update-check" method="POST">
@@ -24,25 +24,28 @@
                 </form>
                 </div>
             </h2>
-            
-        </div>
+
+        </div>    
         <p class='description' id="description-{{ $ono->id }}">
                 {{$ono->description }}
         </p>
-        <div class='cate'>
+        <div class='cate'>   
         <a href="/categories/{{ $ono->category->id }}">{{ $ono->category->name }}</a>
         </div>
     @endforeach
-    
-    </div>
-<div>
-    <h3>進捗状況: {{ round($progress, 2) }}%</h3>
-    <div style="background-color: #e0e0e0; height: 20px; width: 100%; border-radius: 10px;">
-        <div style="background-color: #76c7c0; height: 100%; width: {{ $progress }}%; border-radius: 10px;"></div>
-    </div>
-</div>
-<a href='/onomatopes/create'>create</a>
 
+    </div>
+
+    <div>
+        <h3>進捗状況: {{ round($progress, 2) }}%</h3>
+        <div style="background-color: #e0e0e0; height: 20px; width: 100%; border-radius: 10px;">
+            <div style="background-color: #64E986; height: 100%; width: {{ $progress }}%; border-radius: 10px;"></div>
+        </div>
+    </div>
+    <a href='/onomatopes/create'>create</a>
+    <div class="footer">
+                <a href="/">戻る</a>
+    </div>
 
 
 
@@ -51,14 +54,11 @@
 
 <!-- ページネーションリンク -->
   <div class='pagination'>
-    {{ $onos->links('pagination::default') }}
+    {{ $onomatopes->links('pagination::default') }}
   </div>
 </x-app-layout>
 
 <!-- JavaScript -->
-
-
-
 <script>
     function deletePost(id) {
         'use strict'
@@ -84,12 +84,11 @@
         display: flex;
     }
 
-
     .name {
         color: #555555;
+        font-weight: bold;
         display: flex;
         align-items: center;
-        font-weight: bolder;      
     }
 
     .delete {
@@ -107,9 +106,9 @@
     }
 
     .cate{
-        margin-top: 1px;
-        margin-bottom: 13px;
-        font-size: 15px;
+        margin-top: 2px;
+        margin-bottom: 5px;
+        font-size: 13px;
         border: 2px burlywood; 
         padding: 6px;
 
@@ -118,13 +117,14 @@
     .pagination {
         margin-top: 20px;
         text-align: center;
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .pagination .active {
         color: #76c7c0;
         font-size: 20px;
     }
+
 
     .achieve-button {
         font-size: 15px;
@@ -135,7 +135,7 @@
         color: green;              /* テキスト色 */
         cursor: pointer;           /* ホバー時のカーソルを指に */
         margin-left: 3px;           /* 左に3pxの余白を追加 */
-        margin-right: 25px;         
+        margin-right: 25px;
     }
 
     /* 達成済みテキストに囲み線を追加 */
@@ -146,7 +146,7 @@
         border-radius: 5px;        /* 角を丸くする */
         background-color: #f0f0f0; /* 少し明るいグレーの背景 */
         color: gray;               /* テキスト色 */
-        display: inline-block;      /* テキストの周りに枠を表示 */
-        margin-left: 3px;
+        display: inline-block; 
+        margin-left: 3px;           /* 左に3pxの余白を追加 */
         margin-right: 15px;
 </style>
