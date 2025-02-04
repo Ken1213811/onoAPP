@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('onomatopes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',20);
-            $table->string('image_url')->nullable();
-            $table->string('description');
-            $table->timestamps();
+        Schema::table('onomatopes', function (Blueprint $table) {
+            $table->foreignId('category_id')->nullable()->constrained();
+            //'category_id' は 'categoriesテーブル' の 'id' を参照する外部キーです
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('onomatopes');
+        Schema::table('onomatopes', function (Blueprint $table) {
+            
+        });
     }
 };
