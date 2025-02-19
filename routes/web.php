@@ -28,6 +28,7 @@ Route::controller(OnoController::class)->middleware(['auth'])->group(function(){
 Route::get('/onomatopes/create', [OnoController::class, 'create']);//投稿フォームの表示
 Route::get('/onomatopes/{onomatope}',[OnoController::class ,'show']);//投稿詳細画面の表示
 Route::post('/onomatopes', [OnoController::class, 'store']);//画像を含めた投稿の保存処理
+Route::put('/onomatopes/{onomatope}', [OnoController::class, 'update']);
 Route::delete('/onomatopes/{onomatope}',[OnoController::class ,'delete']);
 Route::post('/onomatopes/{ono}/update-check', [OnoController::class, 'updateCheck']);
 Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware('auth');
