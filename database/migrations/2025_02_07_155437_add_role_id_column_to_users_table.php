@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('age')->nullable();
+            //roleカラムをTINYINT型でpasswordカラムの後に追加。更にインデックスを付与。
+            $table->tinyInteger('role')->default(0)->after('password')->index('index_role')->comment('ロール');
         });
     }
 
@@ -21,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role');
+        });
     }
 };

@@ -17,7 +17,7 @@ class CategoryController extends Controller
         $onomatopes =$category->getByCategory();
         $totalCount = $category->getByCategory()->count();// 全データの数
         $user = Auth::user(); 
-        $count = $user -> onomatopes()->where('category_id', $category->id) -> count();
+        $count = $user -> onomatopes()->where('category_id',$category->id) -> count();
                                                       //カテゴリid中urlのidと一致するやつを数える
       
         $progress = $count/$totalCount * 100;
@@ -25,6 +25,7 @@ class CategoryController extends Controller
         return view('categories.index')->with([
             'onomatopes'=>$onomatopes ,
             'progress' => $progress, // 進捗率をビューに渡す
+            'user'=>$user
          ]); 
 
     }

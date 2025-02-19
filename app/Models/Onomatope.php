@@ -12,6 +12,7 @@ class onomatope extends Model
         'name',
         'description',
         'category_id',
+        'memo',
         'image_url',
     ];
 

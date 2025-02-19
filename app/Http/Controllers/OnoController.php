@@ -28,6 +28,7 @@ class OnoController extends Controller
         return view('onos.index')->with([
             'onos'=>$onomatopes ,
             'progress' => $progress, // 進捗率をビューに渡す
+            'user'=>$user
          ]); 
 
     }
@@ -63,13 +64,19 @@ class OnoController extends Controller
     }
     public function update(Request $request, Onomatope $onomatope)
     {
-    // チェック状態を更新
-    $onomatope->update([
-        'checked' => $request->input('checked', false),
-    ]);
-
-    return response()->json(['message' => '状態が更新されました', 'checked' => $onomatope->checked]);
+        $input_ono = $request['ono'];
+        
+        $onomatope->fill($input_ono)->save();
+       
+        return redirect('/onomatopes/' . $onomatope->id); //web.phpと同じインスタンスにして、自動的にどこかを更新するのかをわからせる
     }
+
+
+
+
+
+       
+  
     public function updateCheck(Request $request,Onomatope $ono)
     {   //中間テーブル->数を数える->リダイレクト
         // 最新の進捗率を計算

@@ -1,28 +1,33 @@
 <x-app-layout>
     <x-slot name="header">
-        words
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+          オノマトペ一覧
+        </h2>
+
     </x-slot>
 
     <div class='onos'>
     @foreach ($onos as $ono)
         <div class='ono'>
-                @if($ono->users->count() == 0)
+                @if($ono->users->where('id', $user->id)->count() == 0)
                     <form action="/onomatopes/{{$ono->id}}/update-check" method="POST">
                         @csrf
-                        <button type="submit" class="achieve-button">達成</button>
+                        👉<button type="submit" class="achieve-button">達成</button>
                     </form>   
                 @else
                     <p class="achieved-text">達成済</p>
                 @endif
             <h2 class='name' id="name-{{ $ono->id }}">
                 <a href="/onomatopes/{{ $ono->id }}">{{ $ono->name  }}</a>
-                <div class="delete">
-                <form action="/onomatopes/{{ $ono->id }}" id="form_{{ $ono->id }}" method="post">
-                     @csrf
-                     @method('DELETE')
-                    <button type="button" onclick="deletePost({{ $ono->id }})">--delete</button> 
-                </form>
-                </div>
+                @if($user->role==1)
+                    <div class="delete">
+                    <form action="/onomatopes/{{ $ono->id }}" id="form_{{ $ono->id }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" onclick="deletePost({{ $ono->id }})">--delete</button> 
+                    </form>
+                    </div>
+                @endif
             </h2>
             
         </div>
@@ -30,7 +35,7 @@
                 {{$ono->description }}
         </p>
         <div class='cate'>
-        <a href="/categories/{{ $ono->category->id }}">{{ $ono->category->name }}</a>
+        <a href="/categories/{{ $ono->category->id }}">【{{ $ono->category->name }}】</a>
         </div>
     @endforeach
     
@@ -41,7 +46,10 @@
         <div style="background-color: #76c7c0; height: 100%; width: {{ $progress }}%; border-radius: 10px;"></div>
     </div>
 </div>
-<a href='/onomatopes/create'>create</a>
+@if($user->role==1)
+    <a href='/onomatopes/create'>create</a>
+@endif
+
 
 
 
@@ -77,6 +85,10 @@
     .onos {
         display: flex;
         flex-direction: column;
+        background: #fffcf4;
+        border-radius :8px;/*角の丸み*/
+        box-shadow :0px 0px 5px silver;/*5px=影の広がり具合*/
+        padding: 0.5em 0.5em 0.5em 1em;
     }
 
     .ono {
@@ -104,18 +116,20 @@
         font-weight: normal;
         font-size: 16px;
         color:#333333 ;
+        margin-left: 4px;   
     }
 
     .cate{
         margin-top: 1px;
         margin-bottom: 13px;
-        font-size: 15px;
-        border: 2px burlywood; 
+        font-size: 15px;     
         padding: 6px;
 
     }
 
     .pagination {
+        border: 1px solid #ddd;
+        color: #007bff;
         margin-top: 20px;
         text-align: center;
         font-size: 16px;
@@ -149,4 +163,6 @@
         display: inline-block;      /* テキストの周りに枠を表示 */
         margin-left: 3px;
         margin-right: 15px;
+
+    
 </style>
