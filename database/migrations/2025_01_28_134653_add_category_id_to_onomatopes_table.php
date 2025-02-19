@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('age')->nullable();
+        Schema::table('onomatopes', function (Blueprint $table) {
+            $table->foreignId('category_id')->nullable()->constrained();
+            //'category_id' は 'categoriesテーブル' の 'id' を参照する外部キーです
         });
     }
 
@@ -21,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::table('onomatopes', function (Blueprint $table) {
+            
+        });
     }
 };

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('onomatopes', function (Blueprint $table) {
+        Schema::create('onomatope_user', function (Blueprint $table) {
             $table->id();
-            $table->string('name',20);
-            $table->string('image_url')->nullable();
-            $table->string('description');
+            $table->foreignId('onomatope_id')->constrained();
+            $table->foreignId('user_id')->constrained(); 
+         
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('onomatopes');
+        Schema::dropIfExists('onomatope_user');
     }
 };
